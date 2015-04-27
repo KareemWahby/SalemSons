@@ -1,0 +1,15 @@
+#pic_show.row
+	.col-md-8.col-md-offset-2
+		.panel.panel-default
+			.panel-heading.pic_image
+				= image_tag @pic.image_url.to_s
+				.panel-body
+					%h1= @pic.caption
+				.panel-footer
+					.row
+						.col-md-6
+							.btn-group.pull-right
+								=link_to "Back" , '/pics',class: "btn btn-default"
+								- if admin_signed_in?
+									=link_to "Edit" , edit_pic_path,class: "btn btn-default"
+									=link_to "Delete",pic_path,method: :delete , data: {confirm: "Are you sure?"},class: "btn btn-default"

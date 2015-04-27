@@ -1,0 +1,35 @@
+!!! 5
+%html
+%head
+	%title Awlad Salem Co.L.L.C.
+	= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+	= javascript_include_tag 'application', 'data-turbolinks-track' => true
+	= csrf_meta_tags
+
+%body
+	%nav.navbar.navbar-default
+		.container
+			
+			.navbar-brand
+				=image_tag "logo.png"
+				= link_to "Awlad Salem Co.L.L.C.",root_path
+			- if admin_signed_in?
+				%ul.nav.navbar-nav.navbar-right
+					%li= link_to "Home",root_path
+					%li= link_to "Gallery",pics_path
+					%li= link_to "Company Profile",projects_path
+					%li= link_to "Add Picture",new_pic_path
+					%li= link_to "Add Project",new_project_path
+					%li= link_to "Admin Settings",edit_admin_registration_path
+					%li= link_to "Sign Out",destroy_admin_session_path, method: :delete
+			- else
+				%ul.nav.navbar-nav.navbar-right
+					%li= link_to "Home", root_path
+					%li= link_to "Gallery",pics_path
+					%li= link_to "Company Profile",projects_path
+					%li= link_to "Sign In",new_admin_session_path
+
+	.container
+		-flash.each do |name, msg|
+			=content_tag :div, msg, class: "alert alert-info"
+		= yield
